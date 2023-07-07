@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./shoppingCart.css">
+    <script src="https://kit.fontawesome.com/87204f0b02.js" crossorigin="anonymous"></script>
+
+    <title>shoppingCart</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container-wrap">
+            <div class="container">
+                <div class="cart">
+                    <h1><i class="fa-solid fa-cart-shopping"></i>購物車</h1>
+
+
+                    <div class="item_container" v-for="(item, index) in itemList" :key="item.id">
+                        <div class="item_body">
+                            <div class="item_detail">
+                                <img :src="item.imgUrl">
+                                <div class="name">{{ item.itemName }}</div>
+                            </div>
+                            <div class="count">
+                                <button @click="handleSub(item)">-</button>
+                                {{ item.count }}
+                                <button @click="handlePlus(item)">+</button>
+                            </div>
+                            <div class="amount">{{ item.price * item.count }}元</div>
+                            <div class="delete">
+                                <button @click="handleDelete(index)"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item_total">
+                        <div class="total">總計<span>{{ totalAmount }}</span>元</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    itemList: [
+                        {
+                            id: '1',
+                            itemName: 'QQ迪士尼扭蛋',
+                            imgUrl: './vue-A-pic/1.png',
+                            price: '180',
+                            count: 1
+                        },
+                        {
+                            id: '2',
+                            itemName: 'QQ小熊維尼扭蛋',
+                            imgUrl: './vue-A-pic/2.png',
+                            price: '200',
+                            count: 1
+                        },
+                        {
+                            id: '3',
+                            itemName: 'QQ日本樂園扭蛋',
+                            imgUrl: './vue-A-pic/3.png',
+                            price: '200',
+                            count: 1
+                        },
+                        {
+                            id: '4',
+                            itemName: 'Weeee~~摩艾石像扭蛋',
+                            imgUrl: './vue-A-pic/4.png',
+                            price: '250',
+                            count: 1
+                        },
+                        {
+                            id: '5',
+                            itemName: '炸蝦先生扭蛋',
+                            imgUrl: './vue-A-pic/5.png',
+                            price: '300',
+                            count: 1
+                        },
+                        {
+                            id: '6',
+                            itemName: 'TAKARA 厚倒扭蛋',
+                            imgUrl: './vue-A-pic/6.png',
+                            price: '280',
+                            count: 1
+                        },
+                    ]
+                };
+            },
+            computed: {
+                totalAmount() {
+                    return this.itemList.reduce((total, item) => total + (item.price * item.count), 0);
+                }
+            },
+            methods: {
+                handlePlus(item) {
+                    item.count++;
+                },
+                handleSub(item) {
+                    if (item.count > 1) {
+                        item.count--;
+                    }
+                },
+                handleDelete(index) {
+                    this.itemList[index].isDeleting = true;
+                    setTimeout(() => {
+                        this.itemList.splice(index, 1);
+                    }, 300);
+                }
+
+
+            }
+        }).mount('#app');
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  .pic-container {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+
+    width: 600px;
+
+  }
+
+  .color-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+
+  }
+
+  button {
+    background: linear-gradient(to right, #C8EAC0, #BFE8C4, #A7E1CE, #80D7E0);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 20px;
+    border: 2px;
+    cursor: pointer;
+    padding: 6px;
+  }
+
+  button:hover {
+    background: rgb(87, 86, 85);
+    color: #fff;
+  }
+</style>
+
+<body>
+  <div id="app">
+    <div class="pic-container" :style="{ backgroundColor: bgColor }">
+
+      <img src="https://picsum.photos/300/200/?random=10" alt="Avatar" class="pic">
+
+    </div>
+
+
+    <div class="color-button">
+      <button v-for="(color, index) in colors" :key="index" @click="changeBackground(color)">
+        {{ color.name }}
+      </button>
+    </div>
+
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.20/dist/vue.global.js"></script>
+ 
+    <script>
+
+      const app = Vue.createApp({
+        data() {
+        return {
+        colors: ['#FFAAD5', '#FCEF7B', '#ACDCF0', '#B0CBF1', '#B3BBF2', '#C2B7F3', '#E2EA92', '#9DEE9D', '#7CACF7', '#C389FA'],
+        bgColor: 'transparent'
+      };
+      },
+      methods: {
+        changeBackground(color) {
+        this.bgColor = color;
+        }
+      }
+    });
+
+      app.mount('#app');
+  </script>
+</body>
+
+
+</html>
